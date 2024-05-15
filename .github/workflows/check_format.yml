@@ -1,5 +1,7 @@
-name: Check format.
-on: pull_request
+name: Check format
+
+on:
+  pull_request:
 
 jobs:
   checks:
@@ -7,6 +9,7 @@ jobs:
     strategy:
       matrix:
         check: ['prettier', 'eslint']
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -18,10 +21,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20.x'
+          cache: 'npm'
 
       - name: Install Dependencies
-        run: |
-          npm install
+        run: npm install
+
       - name: Run check
         run: |
           if [ "${{ matrix.check }}" == "prettier" ]; then
