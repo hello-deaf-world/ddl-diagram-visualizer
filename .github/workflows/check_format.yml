@@ -11,6 +11,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Move to the project directory
+        run: cd ddl-diagram-visualizer
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -21,7 +24,6 @@ jobs:
           npm install
       - name: Run check
         run: |
-          cd ddl-diagram-visualizer
           if [ "${{ matrix.check }}" == "prettier" ]; then
             npx prettier --check .
           elif [ "${{ matrix.check }}" == "eslint" ]; then
