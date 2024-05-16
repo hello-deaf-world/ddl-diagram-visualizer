@@ -33,11 +33,15 @@ module.exports = {
         format: ["camelCase", "PascalCase"],
       },
       {
+        selector: "variable",
+        format: ["camelCase", "UPPER_CASE"],
+      },
+      {
         selector: ["class", "interface", "typeAlias", "enum"],
         format: ["PascalCase"],
       },
       {
-        selector: ["variable","enumMember"],
+        selector: ["enumMember"],
         format: ["UPPER_CASE"],
       },
     ],
