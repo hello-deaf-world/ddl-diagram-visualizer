@@ -21,7 +21,6 @@ module.exports = {
       "error",
       {
         selector: [
-          "variable",
           "parameter",
           "method",
           "property",
@@ -38,7 +37,7 @@ module.exports = {
         format: ["PascalCase"],
       },
       {
-        selector: ["enumMember"],
+        selector: ["variable","enumMember"],
         format: ["UPPER_CASE"],
       },
     ],
