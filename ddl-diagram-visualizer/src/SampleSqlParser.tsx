@@ -1,4 +1,4 @@
-import { Parser } from "node-sql-parser";
+import { Parser } from 'node-sql-parser';
 
 export const SampleSqlPaser = () => {
   const parser = new Parser();
@@ -19,7 +19,7 @@ export const SampleSqlPaser = () => {
     SELECT s.id, p.name, s.price FROM sales s LEFT JOIN product p ON s.id = p.id;
     `;
   const { tableList, columnList } = parser.parse(sql, {
-    database: "MySQL",
+    database: 'MySQL',
   });
 
   const strTableList = JSON.stringify(tableList, null, 2);
