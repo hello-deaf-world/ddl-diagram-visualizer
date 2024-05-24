@@ -9,15 +9,10 @@ jobs:
     strategy:
       matrix:
         check: ['prettier', 'eslint']
-    defaults:
-      run:
-        working-directory: /home/runner/work/ddl-diagram-visualizer/ddl-diagram-visualizer/dev/ddl-diagram-visualizer
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - run: 
-            echo $PWD
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -27,10 +22,12 @@ jobs:
 
       - name: Install Dependencies
         run: |
+          cd ddl-diagram-visualizer
           npm install
 
       - name: Run check
         run: |
+          cd ddl-diagram-visualizer
           if [ "${{ matrix.check }}" == "prettier" ]; then
             npm run prettier:check
           elif [ "${{ matrix.check }}" == "eslint" ]; then
