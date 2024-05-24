@@ -11,7 +11,7 @@ jobs:
         check: ['prettier', 'eslint']
     defaults:
       run:
-        working-directory: ./dev/ddl-diagram-visualizer
+        working-directory: /home/runner/work/ddl-diagram-visualizer/ddl-diagram-visualizer/dev/ddl-diagram-visualizer
 
     steps:
       - name: Checkout repository
