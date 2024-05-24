@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         check: ['prettier', 'eslint']
-
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -22,12 +22,12 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          cd ddl-diagram-visualizer
+          cd ${GITHUB_WORKSPACE}/dev/ddl-diagram-visualizer
           npm install
 
       - name: Run check
         run: |
-          cd ddl-diagram-visualizer
+          cd ${GITHUB_WORKSPACE}/dev/ddl-diagram-visualizer
           if [ "${{ matrix.check }}" == "prettier" ]; then
             npm run prettier:check
           elif [ "${{ matrix.check }}" == "eslint" ]; then
