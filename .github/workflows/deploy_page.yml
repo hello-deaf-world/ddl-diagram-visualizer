@@ -37,11 +37,11 @@ jobs:
           cache: 'npm'
       - name: Install dependencies
         run:
-            cd ddl-diagram-visualizer 
+            cd dev/ddl-diagram-visualizer 
             npm ci
       - name: Build
         run:
-            cd ddl-diagram-visualizer 
+            cd dev/ddl-diagram-visualizer 
             npm run build
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -49,7 +49,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # dist フォルダーのアップロード
-          path: './ddl-diagram-visualizer/dist'
+          path: './dev/ddl-diagram-visualizer/dist'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
