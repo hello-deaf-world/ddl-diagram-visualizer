@@ -8,6 +8,7 @@ module.exports = {
     "plugin:react/jsx-runtime",
     "plugin:react-hooks/recommended",
     "prettier",
+    "plugin:storybook/recommended"
   ],
   ignorePatterns: ["dist", ".eslintrc.cjs", "vite.config.js"],
   parser: "@typescript-eslint/parser",
@@ -45,5 +46,9 @@ module.exports = {
         format: ["UPPER_CASE"],
       },
     ],
+  },
+  settings: {
+    // Reactバージョンを自動検出
+    react: { version: "detect" },
   },
 };

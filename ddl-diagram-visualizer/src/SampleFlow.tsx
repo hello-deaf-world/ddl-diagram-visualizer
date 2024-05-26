@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo } from 'react';
 import ReactFlow, {
   Controls,
   Background,
@@ -7,8 +7,11 @@ import ReactFlow, {
   NodeChange,
   EdgeChange,
   Edge,
+  useNodesState,
+  useEdgesState,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
+import { DemoNode } from './components/Node/Node';
 
 const initialEdges: Edge<string>[] = [
   { id: 'e1-2', source: '1', target: '2' },
@@ -22,7 +25,13 @@ const initialNodes = [
     data: { label: 'Input Node' },
     position: { x: 250, y: 25 },
   },
-
+  // カスタムノードを追加
+  {
+    id: 'demoNode',
+    type: 'demoNode',
+    position: { x: 30, y: 20 },
+    data: { label: 'Demo Node' },
+  },
   {
     id: '2',
     data: { label: 'Default Node' },
@@ -37,8 +46,11 @@ const initialNodes = [
 ];
 
 export const Flow = () => {
-  const [nodes, setNodes] = useState(initialNodes);
-  const [edges, setEdges] = useState(initialEdges);
+  // カスタムノードを登録
+  const nodeTypes = useMemo(() => ({ demoNode: DemoNode }), []);
+
+  const [nodes, setNodes] = useNodesState(initialNodes);
+  const [edges, setEdges] = useEdgesState(initialEdges);
 
   const onNodesChange = useCallback(
     (changes: NodeChange[]) =>
@@ -58,6 +70,8 @@ export const Flow = () => {
         edges={edges}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
+        // カスタムノードを登録
+        nodeTypes={nodeTypes}
       >
         <Background />
         <Controls />
