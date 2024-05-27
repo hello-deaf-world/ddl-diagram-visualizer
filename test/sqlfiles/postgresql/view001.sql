@@ -1,0 +1,6 @@
+CREATE VIEW view001 AS
+SELECT
+  DISTINCT
+  text_001_01 AS hoge,
+  date_001_01
+FROM table001;

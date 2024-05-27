@@ -1,0 +1,5 @@
+CREATE TABLE table002 (
+  text_002_01 VARCHAR(200),
+  date_002_01 DATE,
+  sum_002_01 INTEGER
+);
