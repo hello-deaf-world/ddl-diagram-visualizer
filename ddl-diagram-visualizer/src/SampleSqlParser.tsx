@@ -1,13 +1,8 @@
 import { Parser } from 'node-sql-parser';
 import { useState } from 'react';
-import Select, { SingleValue } from 'react-select';
+import { Select } from 'antd';
 
-interface OptionType {
-  value: string;
-  label: string;
-}
-
-const options: OptionType[] = [
+const options = [
   { value: 'MySQL', label: 'MySQL' },
   { value: 'PostgreSQL', label: 'PostgreSQL' },
   { value: 'MariaDB', label: 'MariaDB' },
@@ -22,11 +17,11 @@ export const SampleSqlParser = () => {
   // セレクトボックスの選択がトリガー
   // 別コンポーネントとして作成したほうがいいが、
   // その方法が複雑なため、ひとまずここに記載する
-  // 参考サイト：https://qiita.com/Hitomi_Nagano/items/c00df24dc24e0329167d
-  const onChange = (value: SingleValue<OptionType>) => {
-    console.log(`onChange selected:`, value);
+  // 参考サイト：https://ant.design/components/select
+  const onChange = (value: string) => {
+    console.log(`onChange selected:${value}`);
     // 読み込んだファイルの内容を状態に追加
-    setDatabase(value?.value as string);
+    setDatabase(value);
   };
 
   // ファイルアップロードをトリガーにしている
@@ -40,16 +35,23 @@ export const SampleSqlParser = () => {
     // ファイルがなければ終了
     if (!files || files?.length === 0) return;
 
+    // SQLファイルのみ許可するための正規表現を定義する
+    const allowExtensions = '.(sql)$';
+
     // 各ファイルを読み込んでAST解析をする
     for (const file of files) {
+      // 許可する拡張子以外の場合、スキップする
+      if (!file.name.match(allowExtensions)) continue;
+
       // 非同期読み込みのためのインスタンス作成
       const reader = new FileReader();
 
-      // 非同期読み込みが完了したら以下の関数が実行される
+      // 非同期読み込みが完了したらSQL解析関数を実行する
       reader.onloadend = (e) => {
         console.log(`「${file.name}」ファイル読み込みを完了しました`);
-        // 読み込んだArrayBufferをデコードして解析関数実行
+        // 読み込んだArrayBufferをデコードする
         const decodedContent = enc.decode(e.target?.result as ArrayBuffer);
+        // SQL解析関数を実行する
         sqlparse(decodedContent);
       };
 
@@ -84,7 +86,12 @@ export const SampleSqlParser = () => {
 
   return (
     <div>
-      <Select options={options} defaultValue={options[0]} onChange={onChange} />
+      <Select
+        options={options}
+        defaultValue={options[0].value}
+        onChange={onChange}
+      />
+      <br />
       <br />
       <input
         id="inputfile"
