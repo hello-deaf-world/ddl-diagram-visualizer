@@ -17,10 +17,10 @@
   },
   "dependencies": {
     "@reactflow/node-resizer": "^2.2.13",
+    "antd": "^5.17.4",
     "node-sql-parser": "^5.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-select": "^5.8.0",
     "reactflow": "^11.11.3"
   },
   "devDependencies": {
