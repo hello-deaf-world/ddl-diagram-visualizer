@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { DirectoryUpload } from './DirectoryUpload';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
-const meta: Meta<typeof DirectoryUpload> = {
+const meta = {
   title: 'Demo/DirectoryUpload',
   component: DirectoryUpload,
   parameters: {
@@ -14,7 +14,7 @@ const meta: Meta<typeof DirectoryUpload> = {
   },
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ['autodocs'],
-};
+} satisfies Meta<typeof DirectoryUpload>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
